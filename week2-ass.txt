@@ -1,0 +1,181 @@
+import * as React from 'react';
+import { Text, View, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import Constants from 'expo-constants';
+import { Ionicons } from '@expo/vector-icons';
+
+const POLO_BLUE_COLOR = 'rgb(51,60,87)';
+const FOLLOW_COLOR = 'rgb(71,113,246)';
+const SEND_MESSAGE_COLOR = 'rgb(120,213,250)';
+const ImgData = [
+  {id: 1, imgSource: require('./assets/dog.jpg')},
+  {id: 2, imgSource: require('./assets/dog.jpg')},
+  {id: 3, imgSource: require('./assets/dog.jpg')},
+  {id: 4, imgSource: require('./assets/dog.jpg')},
+  {id: 5, imgSource: require('./assets/dog.jpg')},
+  {id: 6, imgSource: require('./assets/dog.jpg')},
+  {id: 7, imgSource: require('./assets/dog.jpg')},
+  {id: 8, imgSource: require('./assets/dog.jpg')},
+  {id: 9, imgSource: require('./assets/dog.jpg')},
+];
+const centerImgData = Math.floor(ImgData.length / 2);
+
+// You can import from local files
+import AssetExample from './components/AssetExample';
+
+// or any pure javascript modules available in npm
+import { Card } from 'react-native-paper';
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style = {styles.header}>
+          <View style={styles.imageformat}>
+            <Image source={require('./assets/avatar.jpg')}
+                   style={styles.image} />
+          </View>
+          <View style = {styles.userInfoFormat}>
+            <Text style={styles.nameForm}> Chien Tran </Text>      
+            <Text style={styles.jobForm}> Developer </Text>      
+            <View style={styles.userButton}>
+              <TouchableOpacity style={styles.followButton}>
+                <Text style={styles.followText}> Follow </Text>
+                </TouchableOpacity>
+              <TouchableOpacity style={styles.sendButton}>
+                <Ionicons name="md-send" size={28} color= "white" />
+                </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        <View style = {styles.middle}>
+          <View style = {styles.Photos}>
+            <Text style = {styles.CountGroup}>200</Text>
+            <Text style = {styles.TextGroup}>Photos</Text>
+            </View>
+          <View style = {styles.Follower}>
+            <Text style = {styles.CountGroup}>999</Text>
+            <Text style = {styles.TextGroup}>Follower</Text>
+            </View>
+          <View style = {styles.Following}>
+            <Text style = {styles.CountGroup}>1</Text>
+            <Text style = {styles.TextGroup}>Following</Text>
+            </View>
+        </View>
+      <ScrollView contentContainerStyle = {{flex : 1}}>
+        <View style = {styles.footer}>
+          <View style = {styles.footerImgFormat}>
+           {ImgData.slice(0 , centerImgData).map(item => {
+             return <Image source={item.imgSource} style={styles.footerImage}/>;
+           })} 
+          </View>
+          <View style = {styles.footerImgFormat}>
+           {ImgData.slice(centerImgData).map(item => {
+             return <Image source={item.imgSource} style={styles.footerImage}/>;
+           })}
+          </View>
+        </View>
+      </ScrollView>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  header: { 
+    flex: 0.25,
+    flexDirection: 'row',
+
+    },
+  middle: {
+    flex: 0.10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  footer: { 
+    flex: 0.65, 
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
+  footerImage: {
+    width: 130,
+    height: 130,
+  },
+  image: {
+    width: 130,
+    height: 130,
+    borderRadius: 65
+  },
+  sendButton: {
+    backgroundColor: SEND_MESSAGE_COLOR,
+    width: 50,
+    height: 30,
+    marginLeft: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 24
+  },
+  followButton: { 
+    backgroundColor: FOLLOW_COLOR,
+    width: 100,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 70,
+    shadowColor: "#000",
+    shadowOffset: {
+    	width: 0,
+    	height: 6,
+    },
+    shadowOpacity: 0.39,
+    shadowRadius: 8.30,
+    elevation: 13,
+  },
+  followText: {
+    color: 'white',
+    fontSize: 15
+  },
+  userButton: { 
+    flexDirection: 'row',
+  },
+  imageformat: {
+    flex: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  userInfoFormat: {
+    flex: 0.5,
+    justifyContent: 'space-evenly'
+  },
+  nameForm: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  jobForm: {
+    fontsize: 15,
+    fontWeight: 100,
+  },
+  Photos: {
+    alignItems: 'center'
+  },
+  Follower: {
+    alignItems: 'center'
+  },
+  Following: {
+    alignItems: 'center'
+  },
+  CountGroup: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  TextGroup: {
+    fontSize: 15,
+    fontWeight: 100
+  }
+
+});
